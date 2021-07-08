@@ -1,3 +1,7 @@
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
 <div class="toolbar" role="banner">
   <img
     width="40"
@@ -7,21 +11,58 @@
 </div>
 
 <div class="content" role="main">
+  <table *ngIf = "!dataAmountIndicadores&&!dataSumaryindicador">
+    <thead>
+      <tr>
+        <td> <h1>Indicadores</h1></td>
+      </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor = "let item of indicadores;">
+          <td *ngIf = "item.codigo" ><span (click)="getDetailsIndicadores(item.codigo)">{{item.nombre}}</span></td>
+          <td *ngIf = "item.codigo"><button (click)="sumaryIndicador(item)" type="button" class="btn btn-info">Info !!</button></td>
+        </tr>
+    </tbody>
+  </table>
 
-  <!-- Footer -->
-  <footer>
-  
+  <table *ngIf = "dataAmountIndicadores&&!dataSumaryindicador">
+    <thead>
+      <tr>
+        <td> <h1>{{dataAmountIndicadores.nombre}}</h1></td>
+      </tr>
+    </thead>
+      <tbody>
+        <tr *ngFor = "let item of dataAmountIndicadores.serie">
+          <td>{{item.fecha}}</td>
+          <td>{{item.valor}}</td>
+        </tr>
+      </tbody>
+  </table>
+
+  <table *ngIf="dataSumaryindicador">
+    <thead>
+      <tr>
+        <td>
+          <h1>${{dataSumaryindicador.valor}}</h1>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Nombre:</td>
+        <td>{{dataSumaryindicador.nombre}}</td>
+      </tr>
+      <tr>
+        <td>Fecha:</td>
+        <td>{{dataSumaryindicador.fecha}}</td>
+      </tr>
+      <tr>
+        <td>Unidad de medida:</td>
+        <td>{{dataSumaryindicador.unidad_medida}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <footer> 
   </footer>
-
-
 </div>
 
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content above * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * End of Placeholder * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
-<router-outlet></router-outlet>
